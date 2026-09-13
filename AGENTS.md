@@ -14,6 +14,7 @@
 ├── skills.sh.json            # skills.sh 分类与展示元数据
 ├── skills-lock.json           # 本地安装来源与内容哈希
 ├── requirements.txt          # 维护/校验工具所需的 Python 依赖
+├── tasks/lessons.md           # 可复用的项目维护教训
 └── skills/
     └── <skill>/
         ├── SKILL.md           # 必需：触发描述与完整工作流
@@ -51,14 +52,14 @@ flowchart TD
 | Git | `git-commit` | 分析变更并生成 Conventional Commit，提交前要求确认 | [SKILL.md](skills/git-commit/SKILL.md) |
 | Git | `commit-zh` | 由主 Agent 执行中文 Conventional Commit，不自动推送 | [SKILL.md](skills/commit-zh/SKILL.md) |
 | Skill 开发 | `update-skill` | 创建或更新通用 Skill 的结构、描述、指令和资源 | [SKILL.md](skills/update-skill/SKILL.md)、`references/best-practices.md`、`agents/openai.yaml` |
-| Skill 开发 | `optimize-agent-instructions` | 审计和优化既有 Skill 与 Agent 文档，保持用途、触发和输出契约 | [SKILL.md](skills/optimize-agent-instructions/SKILL.md) |
+| Skill 开发 | `optimize-agent-instructions` | 依据行为证据优化指令负担、触发与加载方式，保持用途和交付契约 | [SKILL.md](skills/optimize-agent-instructions/SKILL.md) |
 | Skill 开发 | `skill-doctor` | 从真实本地 Agent 会话评估技能效率与代码质量并生成报告 | [SKILL.md](skills/skill-doctor/SKILL.md)、`scripts/`、`scorers/`、`references/`、`assets/` |
-| 多模态 | `image-analyzer` | 通过宿主多模态能力或后备模型分析图片 | [SKILL.md](skills/image-analyzer/SKILL.md) |
+| 多模态 | `image-analyzer` | 按任务范围直读图片或通过视觉代理分析，完整分析与交接保留五节描述 | [SKILL.md](skills/image-analyzer/SKILL.md) |
 | 多模态 | `show-me` | 用 Mermaid、代码结构草图或聚焦 HTML 图解主题 | [SKILL.md](skills/show-me/SKILL.md)、`agents/openai.yaml` |
-| 工程质量 | `code-review` | 按仓库规范与需求审查未提交或指定基线后的代码变化 | [SKILL.md](skills/code-review/SKILL.md)、`agents/openai.yaml` |
-| 工程质量 | `review-fix-goal` | 显式触发后循环审查、修复、验证，并经确认提交/推送 | [SKILL.md](skills/review-fix-goal/SKILL.md)、`references/commit.md`、`references/review.md` |
+| 工程质量 | `code-review` | 只读审查未提交或指定基线后的变更，分别核对仓库规范与需求 | [SKILL.md](skills/code-review/SKILL.md)、`agents/openai.yaml` |
+| 工程质量 | `review-fix-goal` | 显式触发后审查、修复、验证至问题清零，复用有效证据并经确认提交/推送 | [SKILL.md](skills/review-fix-goal/SKILL.md)、`agents/openai.yaml`、`references/commit.md`、`references/review.md` |
 | 工程质量 | `scoped-change` | 界定请求的正确变更边界，避免遗漏或范围扩张 | [SKILL.md](skills/scoped-change/SKILL.md) |
-| 项目上下文 | `index-project` | 创建项目与模块索引，代码变更影响索引时主动同步 | [SKILL.md](skills/index-project/SKILL.md)、`references/first-index.md`、`references/incremental-index.md` |
+| 项目上下文 | `index-project` | 创建项目与模块索引，代码变更影响索引时主动同步；以单份状态快照保留续扫断点 | [SKILL.md](skills/index-project/SKILL.md)、`references/first-index.md`、`references/incremental-index.md` |
 | 项目上下文 | `writing-for-agents` | 为 Agent 编写低上下文负担、触发清晰且过程稳定的指令文档 | [SKILL.md](skills/writing-for-agents/SKILL.md)、`references/skill-mechanics.md`、`agents/openai.yaml` |
 | 项目上下文 | `unslop` | 清理文本中的 AI 套话与机械结构，同时保留原意和语气 | [SKILL.md](skills/unslop/SKILL.md)、`agents/openai.yaml` |
 | 项目上下文 | `ux-writing` | 编写或审查用户可见文案、文档、帮助和诊断文本 | [SKILL.md](skills/ux-writing/SKILL.md) |
@@ -92,17 +93,10 @@ flowchart TD
 4. 验证应与改动范围匹配：文档改动检查结构、链接、frontmatter 和 diff；脚本改动运行对应测试。
 5. `.agents/`、`.claude/` 与 `skills-lock.json` 属于安装状态，不要直接修改镜像；仅在任务明确包含安装结果时从 `skills/` 源码重新同步。
 
-## 变更记录
-
-- 2026-09-05：新增 `optimize-agent-instructions`，用于保持功能契约的指令审计与优化。
-- 2026-09-05：明确代码变更后的索引同步，以及精简 Skill 时保留用途、触发与输出契约的维护要求。
-- 2026-08-26：项目上下文类新增并中文化 `writing-for-agents`。
-- 2026-08-26：建立根级项目索引并记录当前安装镜像；按当前要求不创建 Skill 目录级索引文档。
-
 ## 索引状态
 
-- 上次索引：2026-09-05T10:17:52Z
-- 基线提交：b74c95acc2a0fe01ee8a174c90ad8a9700832ca6
+- 上次索引：2026-09-13T04:54:18Z
+- 基线提交：ef8f86dc463ff47096059e460994a9486bec81b1
 - 索引范围：根级；按用户约定不创建 Skill 目录级 `AGENTS.md` 与 `CLAUDE.md`
 - 已知缺口：无
-- 扫描进度：已完成“根级索引”
+- 扫描进度：已完成
