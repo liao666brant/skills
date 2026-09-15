@@ -12,6 +12,7 @@
 | commit-zh     | 中文 Git 提交：分析变更并生成中文 conventional commit message     |
 | image-analyzer | 分析图片并支持视觉任务，主模型不能读图时使用可用视觉模型   |
 | code-review | 默认审查未提交改动，也可双轴审查指定基线后的仓库规范与需求实现   |
+| simplify | 保持行为不变地简化代码，改善可读性，默认聚焦近期改动 |
 | review-fix-goal | 自包含的跨宿主审查修复闭环，最终复审清零后中文提交并推送       |
 | skill-doctor | 基于本地真实 Agent 会话评估技能效果并生成改进报告 |
 | update-skill | 创建或改进通用 Agent Skill 的结构、触发描述与工作流指令 |
@@ -26,6 +27,7 @@
 
 ## 来源与许可
 
+- `simplify`：中文化并优化自 [oh-my-opencode-slim 随附的 simplify](https://github.com/alvinunreal/oh-my-opencode-slim/blob/2fc0ea82d1a529f1f105513603d8a0847826c112/src/skills/simplify/SKILL.md)，原技能来自 Addy Osmani 的 [code-simplification](https://github.com/addyosmani/agent-skills/blob/be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39/skills/code-simplification/SKILL.md)，遵循 [MIT 许可](https://github.com/addyosmani/agent-skills/blob/be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39/LICENSE)。
 - `optimize-agent-instructions`：整理自本仓库的指令优化实践，参考 Eric Provencher 的 [Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra)。
 - `ux-writing`：改编自 [scarletkc/agents 的 ux-writing](https://github.com/scarletkc/agents/tree/main/skills/ux-writing)，原作者 [scarletkc](https://github.com/scarletkc)，遵循 Apache-2.0 许可。
 - `scoped-change`：改编自 [scarletkc/agents 的 scoped-change](https://github.com/scarletkc/agents/tree/main/skills/scoped-change)，原作者 [scarletkc](https://github.com/scarletkc)，遵循 Apache-2.0 许可。
@@ -83,6 +85,8 @@ skills/
     │   ├── SKILL.md
     │   └── agents/
     │       └── openai.yaml
+    ├── simplify/
+    │   └── SKILL.md
     ├── review-fix-goal/
     │   ├── SKILL.md
     │   ├── agents/

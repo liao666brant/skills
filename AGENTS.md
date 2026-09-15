@@ -57,6 +57,7 @@ flowchart TD
 | 多模态 | `image-analyzer` | 按任务范围直读图片或通过视觉代理分析，完整分析与交接保留五节描述 | [SKILL.md](skills/image-analyzer/SKILL.md) |
 | 多模态 | `show-me` | 用 Mermaid、代码结构草图或聚焦 HTML 图解主题 | [SKILL.md](skills/show-me/SKILL.md)、`agents/openai.yaml` |
 | 工程质量 | `code-review` | 只读审查未提交或指定基线后的变更，分别核对仓库规范与需求 | [SKILL.md](skills/code-review/SKILL.md)、`agents/openai.yaml` |
+| 工程质量 | `simplify` | 保持行为不变地简化代码，改善可读性，默认聚焦近期改动 | [SKILL.md](skills/simplify/SKILL.md) |
 | 工程质量 | `review-fix-goal` | 显式触发后审查、修复、验证至问题清零，复用有效证据并经确认提交/推送 | [SKILL.md](skills/review-fix-goal/SKILL.md)、`agents/openai.yaml`、`references/commit.md`、`references/review.md` |
 | 工程质量 | `scoped-change` | 界定请求的正确变更边界，避免遗漏或范围扩张 | [SKILL.md](skills/scoped-change/SKILL.md) |
 | 项目上下文 | `index-project` | 创建项目与模块索引，代码变更影响索引时主动同步；以单份状态快照保留续扫断点 | [SKILL.md](skills/index-project/SKILL.md)、`references/first-index.md`、`references/incremental-index.md` |
