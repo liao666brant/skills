@@ -19,7 +19,7 @@
 | optimize-agent-instructions | 审计和优化 Skill、AGENTS.md 等指令，保留功能契约并减少无关上下文 |
 | unslop | 清除文本中的 AI 腔、套话和机械结构，保留自然语气与作者个性 |
 | show-me | 用精简图示、代码结构草图和 HTML 解释复杂主题 |
-| index-project  | 创建项目与模块索引，代码变更影响索引时主动同步，并收敛 CLAUDE.md |
+| index-project  | 创建 AGENTS.md 项目与模块索引，代码变更影响索引时主动同步 |
 | writing-for-agents | 为 Agent 编写低上下文负担、触发清晰且过程稳定的指令文档 |
 | ux-writing | 用户可见文案与文档的清晰度、一致性与时效性检查 |
 | scoped-change | 界定变更边界，避免超范围改动与遗漏必要位置 |
