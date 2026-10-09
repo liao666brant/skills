@@ -24,6 +24,8 @@ class ReportRendererTests(unittest.TestCase):
             "scores": {
                 "efficiency": 0.75,
                 "code_quality": 0.93,
+                "procedure_compliance": 0.88,
+                "verbosity": 0.68,
                 "skill_coverage": 0.74,
                 "overall": 0.82,
             },
@@ -126,8 +128,40 @@ class ReportRendererTests(unittest.TestCase):
             self.assertEqual(card["eyebrow"], "skill-doctor")
             self.assertEqual(card["stamp"][1], "warp.dev/skill-doctor")
             self.assertIn("/skill-doctor", card["stamp"][0])
-            self.assertEqual([value for _, value in card["bars"]], [75, 93, 74])
+            self.assertEqual(card["bars"], [
+                ["效率", 75],
+                ["代码质量", 93],
+                ["流程遵从", 88],
+                ["表达详略", 68],
+                ["技能覆盖率", 74],
+            ])
         self.assertTrue("text('# ' + CARD.eyebrow" in script)
+
+    def test_report_displays_all_scored_metrics(self) -> None:
+        page = self.render().split("<script>", 1)[0]
+
+        metrics = re.findall(
+            r'<span class="bar-name">([^<]+)</span>'
+            r'<span class="bar-val">(\d+)</span>', page,
+        )
+        self.assertEqual(metrics, [
+            ("效率", "75"),
+            ("代码质量", "93"),
+            ("流程遵从", "88"),
+            ("表达详略", "68"),
+            ("技能覆盖率", "74"),
+        ])
+
+    def test_missing_scores_use_zero_in_page_and_share_card(self) -> None:
+        page = renderer.render_page({"scores": {"overall": 0.7}})
+
+        values = re.findall(r'<span class="bar-val">(\d+)</span>', page)
+        encoded = re.search(r"var CARD = (.*);", page.rsplit("<script>", 1)[1])
+        self.assertEqual(values, ["0"] * 5)
+        self.assertIsNotNone(encoded)
+        if encoded is not None:
+            card = json.loads(encoded.group(1))
+            self.assertEqual([value for _, value in card["bars"]], [0] * 5)
 
     def test_metric_animation_preserves_values_and_reduced_motion(self) -> None:
         page = self.render().split("<script>", 1)[0]
@@ -138,7 +172,9 @@ class ReportRendererTests(unittest.TestCase):
             "to { transform: scaleX(1); }",
             "width:75%;--metric-delay:180ms",
             "width:93%;--metric-delay:290ms",
-            "width:74%;--metric-delay:400ms",
+            "width:88%;--metric-delay:400ms",
+            "width:68%;--metric-delay:510ms",
+            "width:74%;--metric-delay:620ms",
             "@media (prefers-reduced-motion: reduce)",
             ".bar-fill { animation: none; }",
         ):

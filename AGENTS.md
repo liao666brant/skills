@@ -53,7 +53,7 @@ flowchart TD
 | Git | `commit-zh` | 由主 Agent 执行中文 Conventional Commit，不自动推送 | [SKILL.md](skills/commit-zh/SKILL.md) |
 | Skill 开发 | `update-skill` | 创建或更新通用 Skill 的结构、描述、指令和资源 | [SKILL.md](skills/update-skill/SKILL.md)、`references/best-practices.md`、`agents/openai.yaml` |
 | Skill 开发 | `optimize-agent-instructions` | 依据行为证据优化指令负担、触发与加载方式，保持用途和交付契约 | [SKILL.md](skills/optimize-agent-instructions/SKILL.md) |
-| Skill 开发 | `skill-doctor` | 从真实本地 Agent 会话评估技能效率与代码质量并生成报告 | [SKILL.md](skills/skill-doctor/SKILL.md)、`scripts/`、`scorers/`、`references/`、`assets/` |
+| Skill 开发 | `skill-doctor` | 从真实本地 Agent 会话评估效率、代码质量、流程遵从与表达详略并生成报告 | [SKILL.md](skills/skill-doctor/SKILL.md)、`scripts/`、`scorers/`、`references/`、`assets/` |
 | 多模态 | `image-analyzer` | 按任务范围直读图片或通过视觉代理分析，完整分析与交接保留五节描述 | [SKILL.md](skills/image-analyzer/SKILL.md) |
 | 多模态 | `show-me` | 用 Mermaid、代码结构草图或聚焦 HTML 图解主题 | [SKILL.md](skills/show-me/SKILL.md)、`agents/openai.yaml` |
 | 工程质量 | `code-review` | 只读审查未提交或指定基线后的变更，分别核对仓库规范与需求 | [SKILL.md](skills/code-review/SKILL.md)、`agents/openai.yaml` |

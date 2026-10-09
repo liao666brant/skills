@@ -255,6 +255,8 @@ def render_page(r) -> str:
         for index, (name, val) in enumerate([
             ("效率", scores.get("efficiency", 0)),
             ("代码质量", scores.get("code_quality", 0)),
+            ("流程遵从", scores.get("procedure_compliance", 0)),
+            ("表达详略", scores.get("verbosity", 0)),
             ("技能覆盖率", scores.get("skill_coverage", 0)),
         ])
     )
@@ -287,6 +289,8 @@ def render_page(r) -> str:
         "bars": [
             ["效率", pct(scores.get("efficiency", 0))],
             ["代码质量", pct(scores.get("code_quality", 0))],
+            ["流程遵从", pct(scores.get("procedure_compliance", 0))],
+            ["表达详略", pct(scores.get("verbosity", 0))],
             ["技能覆盖率", pct(scores.get("skill_coverage", 0))],
         ],
         "meta": f"发现 {stats.get('sessions_scanned', 0)} 条会话 \u00b7 "
@@ -519,8 +523,8 @@ def page_script(card_data: str) -> str:
 
     var bx = fx + 392;
     var bw = fx + fw - 36 - bx;
-    var rowH = 35, gap = 28;
-    var top = mainMid - (3 * rowH + 2 * gap) / 2;
+    var rowH = 35, gap = CARD.bars.length > 3 ? 12 : 28;
+    var top = mainMid - (CARD.bars.length * rowH + (CARD.bars.length - 1) * gap) / 2;
     CARD.bars.forEach(function (bar, index) {
       var y = top + index * (rowH + gap);
       font('500', 14);

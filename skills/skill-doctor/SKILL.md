@@ -1,6 +1,6 @@
 ---
 name: "skill-doctor"
-description: "基于真实的本地 Agent 会话，按效率和代码质量评估项目或全局技能，拟定有证据支持的改进并生成可分享报告。适用于用户想检查 Agent 配置质量、技能触发效果或哪些已安装技能真正发挥了作用；不用于脱离会话证据的一般代码审查。"
+description: "基于真实的本地 Agent 会话，按效率、代码质量、流程遵从和表达详略评估项目或全局技能，拟定有证据支持的改进并生成可分享报告。适用于用户想检查 Agent 配置质量、技能触发效果或哪些已安装技能真正发挥了作用；不用于脱离会话证据的一般代码审查。"
 license: MIT
 ---
 # skill-doctor
@@ -61,24 +61,30 @@ python3 "$SKILL_ROOT/scripts/collect_sessions.py" \
 
 ## 第 2 步：为采样会话评分
 
-按效率和代码质量评估采样会话。50 份以内的会话摘要在一个批次中处理；超过 50 份时分批并行评估，每批可取 20 份。在当前本地 Agent 进程中评分；若委派，只能使用确保会话内容留在用户机器上的本地子代理。评分时加载：
+按效率、代码质量、流程遵从和表达详略评估采样会话。50 份以内的会话摘要在一个批次中处理；超过 50 份时分批并行评估，每批可取 20 份。在当前本地 Agent 进程中评分；若委派，只能使用确保会话内容留在用户机器上的本地子代理。评分时加载：
 
 - `$SKILL_ROOT/scorers/efficiency.md`
 - `$SKILL_ROOT/scorers/code-quality.md`
+- `$SKILL_ROOT/scorers/procedure-compliance.md`
+- `$SKILL_ROOT/scorers/verbosity.md`
 
-逐一读取 `$REPORT_DIR/transcripts/` 中的会话，并按两份量表评估。每个评分项记录：标签、量表标签表中的数值分数，以及引用会话具体事实的 1 至 3 句理由。仅当会话展示了代码改动时才评估代码质量；否则记录 `insufficient_evidence`，并将该评分项排除在代码质量平均分和失败判定之外。
+逐一读取 `$REPORT_DIR/transcripts/` 中的会话，并按四份量表评估。每个评分项记录：标签、量表标签表中的数值分数，以及引用会话具体事实的 1 至 3 句理由。仅当会话展示了代码改动时才评估代码质量；否则记录 `insufficient_evidence`，并将该评分项排除在代码质量平均分和失败判定之外。
 
 ## 第 3 步：汇总
 
 - `raw_efficiency`：所有已评分会话的效率平均分。
 - `raw_code_quality`：排除 `insufficient_evidence` 后的代码质量平均分。若没有任何会话具备充分证据，设为 0.5，并在发现中说明。
+- `raw_procedure_compliance`：所有已评分会话的流程遵从平均分。
+- `raw_verbosity`：所有已评分会话的表达详略平均分。
 - 将原始量表平均分映射为报告分数：`curve(score) = 0.5 + 0.5 * score`。
 - `efficiency = curve(raw_efficiency)`。
 - `code_quality = curve(raw_code_quality)`。
+- `procedure_compliance = curve(raw_procedure_compliance)`。
+- `verbosity = curve(raw_verbosity)`。
 - `skill_coverage`：检测到至少一个已安装技能的采样会话占比。若 `skills_found` 为 0，则覆盖率为 0。
-- `overall = 0.5 * efficiency + 0.35 * code_quality + 0.15 * skill_coverage.`
+- `overall = 0.25 * efficiency + 0.25 * code_quality + 0.2 * procedure_compliance + 0.15 * verbosity + 0.15 * skill_coverage`。
 
-根据每份会话的原始评分筛选 `failed_conversations`：任一适用的效率或代码质量评分低于 `0.5` 即为失败；`insufficient_evidence` 本身不构成失败。技能改进建议与拟定修改只能使用这些失败会话作为证据。
+根据每份会话的原始评分筛选 `failed_conversations`：任一适用的效率、代码质量、流程遵从或表达详略评分低于 `0.5` 即为失败；`insufficient_evidence` 本身不构成失败。技能改进建议与拟定修改只能使用这些失败会话作为证据。
 
 然后形成报告内容：
 
@@ -99,7 +105,7 @@ python3 "$SKILL_ROOT/scripts/collect_sessions.py" \
 
 ## 第 5 步：写入 report.json 并渲染
 
-写入 `$REPORT_DIR/report.json`。`scores` 保存映射后的 `efficiency`、`code_quality`，实际覆盖率 `skill_coverage`，以及加权总分 `overall`；不要把原始量表平均分写入这些字段。
+写入 `$REPORT_DIR/report.json`。`scores` 保存映射后的 `efficiency`、`code_quality`、`procedure_compliance`、`verbosity`，实际覆盖率 `skill_coverage`，以及加权总分 `overall`；不要把原始量表平均分写入这些字段。
 
 ```json
 {
@@ -111,7 +117,14 @@ python3 "$SKILL_ROOT/scripts/collect_sessions.py" \
     "sessions_analyzed": 0, "sessions_scanned": 0,
     "skills_found": 0, "skills_used": 0, "window_days": 45
   },
-  "scores": {"efficiency": 0.0, "code_quality": 0.0, "skill_coverage": 0.0, "overall": 0.0},
+  "scores": {
+    "efficiency": 0.0,
+    "code_quality": 0.0,
+    "procedure_compliance": 0.0,
+    "verbosity": 0.0,
+    "skill_coverage": 0.0,
+    "overall": 0.0
+  },
   "top_findings": ["", "", ""],
   "suggestions": [
     {
