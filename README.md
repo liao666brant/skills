@@ -22,6 +22,7 @@
 | index-project  | 创建 AGENTS.md 项目与模块索引，代码变更影响索引时主动同步 |
 | writing-for-agents | 为 Agent 编写低上下文负担、触发清晰且过程稳定的指令文档 |
 | ux-writing | 用户可见文案与文档的清晰度、一致性与时效性检查 |
+| clear-writing | 统一人类文档、Agent 文档与文案写作，清理套话并核对事实、执行条件和产品输出 |
 | scoped-change | 界定变更边界，避免超范围改动与遗漏必要位置 |
 | wsl-windows-image | WSL 中读取 Windows 图片：自动转换 /mnt/<盘符>/ 路径并读图            |
 
@@ -36,6 +37,7 @@
 - `unslop`：中文化并适配自 [Cursor plugins 的 pstack/unslop](https://github.com/cursor/plugins/tree/e8d856f0273b42ebafe0ec3546bd645709e7c1b0/pstack/skills/unslop)，原作者 Lauren Tan，遵循 MIT 许可。
 - `show-me`：中文化并适配自 [HumanLayer skills 的 show-me](https://github.com/humanlayer/skills/tree/main/plugins/show-me/skills/show-me)，原作者 HumanLayer，遵循 MIT 许可。
 - `writing-for-agents`：中文化并适配自 [mattpocock/skills 的 writing-for-agents](https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-for-agents)，原作者 Matt Pocock，遵循 MIT 许可。
+- `clear-writing`：整合本仓库的 `writing-for-agents`、`ux-writing` 和 `unslop`。保留上述来源与作者归属；`writing-for-agents`、`unslop` 部分遵循 MIT 许可，`ux-writing` 部分遵循 Apache-2.0 许可。
 
 ## 安装
 
@@ -51,23 +53,23 @@ npx skills add liao666brant/skills -g
 
 #### 项目上下文
 
-一次安装项目索引与 Agent 文档写作技能：
+一次安装项目索引与统一写作技能：
 
 ```bash
-npx skills add liao666brant/skills --skill index-project --skill writing-for-agents
+npx skills add liao666brant/skills --skill index-project --skill clear-writing
 ```
 
-`index-project` 负责创建和维护项目、模块的 `AGENTS.md` 索引；Agent 修改模块内容使索引失实时，应在交付前主动调用并同步受影响的索引。`writing-for-agents` 用于编写或改进 Skill、`AGENTS.md` 和 `CLAUDE.md`。
+`index-project` 负责创建和维护项目、模块的 `AGENTS.md` 索引；Agent 修改模块内容使索引失实时，应在交付前主动调用并同步受影响的索引。`clear-writing` 负责文档与文案质量，包括 Skill、`AGENTS.md` 和 `CLAUDE.md` 的指令表达。
 
-#### 去 AI 味
+#### 文档与文案
 
-一次安装文本去 AI 味与用户文案质量检查技能：
+单独安装统一写作技能：
 
 ```bash
-npx skills add liao666brant/skills --skill unslop --skill ux-writing
+npx skills add liao666brant/skills --skill clear-writing
 ```
 
-`unslop` 清理 AI 腔、套话和机械结构，`ux-writing` 检查用户可见文案与文档的清晰度、一致性和时效性。
+`clear-writing` 覆盖文章、回复、产品文案、人类文档与 Agent 文档，按任务加载参考并清理套话。选择此技能后，无需为同一用途同时安装 `writing-for-agents`、`ux-writing` 和 `unslop`；三个原技能仍可独立安装。
 
 ## 目录结构
 
@@ -127,6 +129,11 @@ skills/
     │       └── skill-mechanics.md
     ├── ux-writing/
     │   └── SKILL.md
+    ├── clear-writing/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   └── references/          # human-writing / product-output / agent-writing / skill-mechanics
     ├── scoped-change/
     │   └── SKILL.md
     └── wsl-windows-image/

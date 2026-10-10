@@ -64,6 +64,7 @@ flowchart TD
 | 项目上下文 | `writing-for-agents` | 为 Agent 编写低上下文负担、触发清晰且过程稳定的指令文档 | [SKILL.md](skills/writing-for-agents/SKILL.md)、`references/skill-mechanics.md`、`agents/openai.yaml` |
 | 项目上下文 | `unslop` | 清理文本中的 AI 套话与机械结构，同时保留原意和语气 | [SKILL.md](skills/unslop/SKILL.md)、`agents/openai.yaml` |
 | 项目上下文 | `ux-writing` | 编写或审查用户可见文案、文档、帮助和诊断文本 | [SKILL.md](skills/ux-writing/SKILL.md) |
+| 项目上下文 | `clear-writing` | 统一人类文档、Agent 文档与文案写作，清理套话并核对事实、执行条件和产品输出 | [SKILL.md](skills/clear-writing/SKILL.md)、`references/`、`agents/openai.yaml` |
 | WSL | `wsl-windows-image` | 将 Windows 图片路径转换为 WSL 路径后读取图片 | [SKILL.md](skills/wsl-windows-image/SKILL.md) |
 
 ## 安装与验证
