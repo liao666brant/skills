@@ -8,23 +8,23 @@
 
 | 技能          | 说明                                                              |
 | ------------- | ----------------------------------------------------------------- |
-| git-commit    | 智能 Git 提交：conventional commits、自动语言检测、可指定语言     |
-| commit-zh     | 中文 Git 提交：分析变更并生成中文 conventional commit message     |
-| image-analyzer | 分析图片并支持视觉任务，主模型不能读图时使用可用视觉模型   |
-| code-review | 默认审查未提交改动，也可双轴审查指定基线后的仓库规范与需求实现   |
-| simplify | 保持行为不变地简化代码，改善可读性，默认聚焦近期改动 |
-| review-fix-goal | 自包含的跨宿主审查修复闭环，最终复审清零后中文提交并推送       |
-| skill-doctor | 基于本地真实 Agent 会话评估技能效果并生成改进报告 |
-| update-skill | 创建或改进通用 Agent Skill 的结构、触发描述与工作流指令 |
-| optimize-agent-instructions | 审计和优化 Skill、AGENTS.md 等指令，保留功能契约并减少无关上下文 |
-| unslop | 清除文本中的 AI 腔、套话和机械结构，保留自然语气与作者个性 |
-| show-me | 用精简图示、代码结构草图和 HTML 解释复杂主题 |
-| index-project  | 创建 AGENTS.md 项目与模块索引，代码变更影响索引时主动同步 |
-| writing-for-agents | 为 Agent 编写低上下文负担、触发清晰且过程稳定的指令文档 |
-| ux-writing | 用户可见文案与文档的清晰度、一致性与时效性检查 |
-| clear-writing | 统一人类文档、Agent 文档与文案写作，清理套话并核对事实、执行条件和产品输出 |
-| scoped-change | 界定变更边界，避免超范围改动与遗漏必要位置 |
-| wsl-windows-image | WSL 中读取 Windows 图片：自动转换 /mnt/<盘符>/ 路径并读图            |
+| [git-commit](skills/git-commit/SKILL.md)    | 智能 Git 提交：conventional commits、自动语言检测、可指定语言     |
+| [commit-zh](skills/commit-zh/SKILL.md)     | 中文 Git 提交：分析变更并生成中文 conventional commit message     |
+| [image-analyzer](skills/image-analyzer/SKILL.md) | 分析图片并支持视觉任务，主模型不能读图时使用可用视觉模型   |
+| [code-review](skills/code-review/SKILL.md) | 默认审查未提交改动，也可双轴审查指定基线后的仓库规范与需求实现   |
+| [simplify](skills/simplify/SKILL.md) | 保持行为不变地简化代码，改善可读性，默认聚焦近期改动 |
+| [review-fix-goal](skills/review-fix-goal/SKILL.md) | 自包含的跨宿主审查修复闭环，最终复审清零后中文提交并推送       |
+| [skill-doctor](skills/skill-doctor/SKILL.md) | 基于本地真实 Agent 会话评估技能效果并生成改进报告 |
+| [update-skill](skills/update-skill/SKILL.md) | 创建或改进通用 Agent Skill 的结构、触发描述与工作流指令 |
+| [optimize-agent-instructions](skills/optimize-agent-instructions/SKILL.md) | 审计和优化 Skill、AGENTS.md 等指令，保留功能契约并减少无关上下文 |
+| [unslop](skills/unslop/SKILL.md) | 清除文本中的 AI 腔、套话和机械结构，保留自然语气与作者个性 |
+| [show-me](skills/show-me/SKILL.md) | 用精简图示、代码结构草图和 HTML 解释复杂主题 |
+| [index-project](skills/index-project/SKILL.md)  | 创建 AGENTS.md 项目与模块索引，代码变更影响索引时主动同步 |
+| [writing-for-agents](skills/writing-for-agents/SKILL.md) | 为 Agent 编写低上下文负担、触发清晰且过程稳定的指令文档 |
+| [ux-writing](skills/ux-writing/SKILL.md) | 用户可见文案与文档的清晰度、一致性与时效性检查 |
+| [clear-writing](skills/clear-writing/SKILL.md) | 统一人类文档、Agent 文档与文案写作，清理套话并核对事实、执行条件和产品输出 |
+| [scoped-change](skills/scoped-change/SKILL.md) | 界定变更边界，避免超范围改动与遗漏必要位置 |
+| [wsl-windows-image](skills/wsl-windows-image/SKILL.md) | WSL 中读取 Windows 图片：自动转换 /mnt/<盘符>/ 路径并读图            |
 
 ## 来源与许可
 
@@ -46,30 +46,6 @@ npx skills add liao666brant/skills -g
 ```
 
 `skills` CLI 会自动发现仓库 `skills/` 下的所有技能，并按当前 agent 写入对应的用户级 skills 目录（Claude Code、Codex、OpenCode 等），一套技能多端通用。
-
-### 项目推荐安装
-
-以下命令应在目标项目根目录运行；不带 `-g`，因此默认安装到当前项目。
-
-#### 项目上下文
-
-一次安装项目索引与统一写作技能：
-
-```bash
-npx skills add liao666brant/skills --skill index-project --skill clear-writing
-```
-
-`index-project` 负责创建和维护项目、模块的 `AGENTS.md` 索引；Agent 修改模块内容使索引失实时，应在交付前主动调用并同步受影响的索引。`clear-writing` 负责文档与文案质量，包括 Skill、`AGENTS.md` 和 `CLAUDE.md` 的指令表达。
-
-#### 文档与文案
-
-单独安装统一写作技能：
-
-```bash
-npx skills add liao666brant/skills --skill clear-writing
-```
-
-`clear-writing` 覆盖文章、回复、产品文案、人类文档与 Agent 文档，按任务加载参考并清理套话。选择此技能后，无需为同一用途同时安装 `writing-for-agents`、`ux-writing` 和 `unslop`；三个原技能仍可独立安装。
 
 ## 目录结构
 
