@@ -55,14 +55,14 @@ flowchart TD
 | Skill 开发 | `optimize-agent-instructions` | 依据行为证据优化指令负担、触发与加载方式，保持用途和交付契约 | [SKILL.md](skills/optimize-agent-instructions/SKILL.md) |
 | Skill 开发 | `skill-doctor` | 从真实本地 Agent 会话评估效率、代码质量、流程遵从与表达详略并生成报告 | [SKILL.md](skills/skill-doctor/SKILL.md)、`scripts/`、`scorers/`、`references/`、`assets/` |
 | 多模态 | `image-analyzer` | 按任务范围直读图片或通过视觉代理分析，完整分析与交接保留五节描述 | [SKILL.md](skills/image-analyzer/SKILL.md) |
-| 多模态 | `show-me` | 用 Mermaid、代码结构草图或聚焦 HTML 图解主题 | [SKILL.md](skills/show-me/SKILL.md)、`agents/openai.yaml` |
+| 多模态 | `show-me` | 显式调用时用 Mermaid、代码结构草图或聚焦 HTML 图解主题 | [SKILL.md](skills/show-me/SKILL.md)、`agents/openai.yaml` |
 | 工程质量 | `code-review` | 只读审查未提交或指定基线后的变更，分别核对仓库规范与需求 | [SKILL.md](skills/code-review/SKILL.md)、`agents/openai.yaml` |
 | 工程质量 | `simplify` | 保持行为不变地简化代码，改善可读性，默认聚焦近期改动 | [SKILL.md](skills/simplify/SKILL.md) |
 | 工程质量 | `review-fix-goal` | 显式触发后审查、修复、验证至问题清零，复用有效证据并经确认提交/推送 | [SKILL.md](skills/review-fix-goal/SKILL.md)、`agents/openai.yaml`、`references/commit.md`、`references/review.md` |
 | 工程质量 | `scoped-change` | 界定请求的正确变更边界，避免遗漏或范围扩张 | [SKILL.md](skills/scoped-change/SKILL.md) |
 | 项目上下文 | `index-project` | 创建项目与模块索引，代码变更影响索引时主动同步；以单份状态快照保留续扫断点 | [SKILL.md](skills/index-project/SKILL.md)、`references/first-index.md`、`references/incremental-index.md` |
 | 项目上下文 | `writing-for-agents` | 为 Agent 编写低上下文负担、触发清晰且过程稳定的指令文档 | [SKILL.md](skills/writing-for-agents/SKILL.md)、`references/skill-mechanics.md`、`agents/openai.yaml` |
-| 项目上下文 | `unslop` | 清理文本中的 AI 套话与机械结构，同时保留原意和语气 | [SKILL.md](skills/unslop/SKILL.md)、`agents/openai.yaml` |
+| 项目上下文 | `unslop` | 显式调用时清理文本中的 AI 套话与机械结构，同时保留原意和语气 | [SKILL.md](skills/unslop/SKILL.md)、`agents/openai.yaml` |
 | 项目上下文 | `ux-writing` | 编写或审查用户可见文案、文档、帮助和诊断文本 | [SKILL.md](skills/ux-writing/SKILL.md) |
 | 项目上下文 | `clear-writing` | 统一人类文档、Agent 文档与文案写作，清理套话并核对事实、执行条件和产品输出 | [SKILL.md](skills/clear-writing/SKILL.md)、`references/`、`agents/openai.yaml` |
 | WSL | `wsl-windows-image` | 将 Windows 图片路径转换为 WSL 路径后读取图片 | [SKILL.md](skills/wsl-windows-image/SKILL.md) |

@@ -12,6 +12,7 @@
 | Pi | `pi` | Pi Agent JSONL，默认位于 `~/.pi/agent/sessions` |
 | Grok Build | `grok` | Chat history JSONL，默认位于 `~/.grok/sessions` |
 | ZCode | `zcode` | Model-io rollout，默认位于 `~/.zcode/cli/rollout` |
+| Hermes | `hermes` | 以只读方式访问 Hermes Agent 的 `state.db`（SQLite 的 `sessions` 和 `messages` 表） |
 
 从运行时上下文确认当前宿主的执行能力，不要根据磁盘上的日志推断正在使用哪个宿主。用户明确指定的来源不在表中、无法对应到受支持的格式，或宿主不能运行采集器时，在创建报告目录和读取会话前停止，说明未读取任何会话及需要补充的来源或能力。
 
@@ -35,6 +36,7 @@ Pi 会话目前不识别子代理身份；Grok Build 带有 `synthetic_reason` �
 - `--pi-home PATH`：Pi Agent 主目录，默认 `~/.pi/agent`。
 - `--grok-home PATH`：Grok Build 主目录，默认 `~/.grok`。
 - `--zcode-home PATH`：ZCode 主目录，默认 `~/.zcode`。
+- `--hermes-home PATH`：包含 `state.db` 的 Hermes Agent 主目录；未指定时依次检查 `HERMES_HOME`、`~/.hermes` 和 `~`。
 
 ## 技能目录
 
@@ -45,4 +47,4 @@ Pi 会话目前不识别子代理身份；Grok Build 带有 `synthetic_reason` �
 - `.claude/skills`
 - `.codex/skills`
 
-添加 `--include-global-skills` 时，还会发现用户主目录下的 `~/.claude/skills`、`~/.agents/skills`，以及配置的 Codex、Pi、Grok Build、ZCode 主目录中的 `skills`。后三者的默认位置分别是 `~/.pi/agent/skills`、`~/.grok/skills` 和 `~/.zcode/skills`。
+添加 `--include-global-skills` 时，还会发现用户主目录下的 `~/.claude/skills`、`~/.agents/skills`，以及配置的 Codex、Pi、Grok Build、ZCode、Hermes 主目录中的 `skills`。Pi、Grok Build 和 ZCode 的默认位置分别是 `~/.pi/agent/skills`、`~/.grok/skills` 和 `~/.zcode/skills`；Hermes 按显式路径、`HERMES_HOME`、`~/.hermes`、`~` 的顺序选择首个含 `state.db` 的目录，没有数据库时取首个候选目录。

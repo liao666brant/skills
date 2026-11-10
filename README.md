@@ -17,8 +17,8 @@
 | [skill-doctor](skills/skill-doctor/SKILL.md) | 基于本地真实 Agent 会话评估技能效果并生成改进报告 |
 | [update-skill](skills/update-skill/SKILL.md) | 创建或改进通用 Agent Skill 的结构、触发描述与工作流指令 |
 | [optimize-agent-instructions](skills/optimize-agent-instructions/SKILL.md) | 审计和优化 Skill、AGENTS.md 等指令，保留功能契约并减少无关上下文 |
-| [unslop](skills/unslop/SKILL.md) | 清除文本中的 AI 腔、套话和机械结构，保留自然语气与作者个性 |
-| [show-me](skills/show-me/SKILL.md) | 用精简图示、代码结构草图和 HTML 解释复杂主题 |
+| [unslop](skills/unslop/SKILL.md) | 显式调用时清除文本中的 AI 腔、套话和机械结构，保留自然语气与作者个性 |
+| [show-me](skills/show-me/SKILL.md) | 显式调用时用精简图示、代码结构草图和 HTML 解释复杂主题 |
 | [index-project](skills/index-project/SKILL.md)  | 创建 AGENTS.md 项目与模块索引，代码变更影响索引时主动同步 |
 | [writing-for-agents](skills/writing-for-agents/SKILL.md) | 为 Agent 编写低上下文负担、触发清晰且过程稳定的指令文档 |
 | [ux-writing](skills/ux-writing/SKILL.md) | 用户可见文案与文档的清晰度、一致性与时效性检查 |
@@ -28,14 +28,14 @@
 
 ## 来源与许可
 
-- `simplify`：中文化并优化自 [oh-my-opencode-slim 随附的 simplify](https://github.com/alvinunreal/oh-my-opencode-slim/blob/2fc0ea82d1a529f1f105513603d8a0847826c112/src/skills/simplify/SKILL.md)，原技能来自 Addy Osmani 的 [code-simplification](https://github.com/addyosmani/agent-skills/blob/be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39/skills/code-simplification/SKILL.md)，遵循 [MIT 许可](https://github.com/addyosmani/agent-skills/blob/be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39/LICENSE)。
+- `simplify`：中文化并优化自 [oh-my-opencode-slim 随附的 simplify](https://github.com/alvinunreal/oh-my-opencode-slim/blob/2fc0ea82d1a529f1f105513603d8a0847826c112/src/skills/simplify/SKILL.md)，原技能来自 Addy Osmani 的 [code-simplification](https://github.com/addyosmani/agent-skills/blob/f1f6fbf3981076da73455bf3b754f5864208a93d/skills/code-simplification/SKILL.md)，遵循 [MIT 许可](https://github.com/addyosmani/agent-skills/blob/be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39/LICENSE)。
 - `optimize-agent-instructions`：整理自本仓库的指令优化实践，参考 Eric Provencher 的 [Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra)。
-- `ux-writing`：改编自 [scarletkc/agents 的 ux-writing](https://github.com/scarletkc/agents/tree/main/skills/ux-writing)，原作者 [scarletkc](https://github.com/scarletkc)，遵循 Apache-2.0 许可。
+- `ux-writing`：改编自 [scarletkc/agents 的 ux-writing](https://github.com/scarletkc/agents/tree/8e149b335e963954e9c4bafba00eedbd7de060ed/skills/ux-writing)，原作者 [scarletkc](https://github.com/scarletkc)，遵循 Apache-2.0 许可。
 - `scoped-change`：改编自 [scarletkc/agents 的 scoped-change](https://github.com/scarletkc/agents/tree/main/skills/scoped-change)，原作者 [scarletkc](https://github.com/scarletkc)，遵循 Apache-2.0 许可。
-- `skill-doctor`：中文化并适配自 [warpdotdev/common-skills 的 skill-doctor](https://github.com/warpdotdev/common-skills/tree/69b4753651ab7fab518c82be087b9f1d5b966631/.agents/skills/skill-doctor)，原作者 Denver Technologies, Inc.，遵循 MIT 许可。
+- `skill-doctor`：中文化并适配自 [warpdotdev/common-skills 的 skill-doctor](https://github.com/warpdotdev/common-skills/tree/7c4eb852de8d7c3e68c81802e1c59db9a611f914/.agents/skills/skill-doctor)，原作者 Denver Technologies, Inc.，遵循 MIT 许可。
 - `update-skill`：中文化并适配自 [warpdotdev/common-skills 的 update-skill](https://github.com/warpdotdev/common-skills/tree/main/.agents/skills/update-skill)，原作者 Denver Technologies, Inc.，遵循 MIT 许可。
-- `unslop`：中文化并适配自 [Cursor plugins 的 pstack/unslop](https://github.com/cursor/plugins/tree/e8d856f0273b42ebafe0ec3546bd645709e7c1b0/pstack/skills/unslop)，原作者 Lauren Tan，遵循 MIT 许可。
-- `show-me`：中文化并适配自 [HumanLayer skills 的 show-me](https://github.com/humanlayer/skills/tree/main/plugins/show-me/skills/show-me)，原作者 HumanLayer，遵循 MIT 许可。
+- `unslop`：中文化并适配自 [Cursor plugins 的 pstack/unslop](https://github.com/cursor/plugins/tree/bc697d0a5a163cec979e362b601e36f5616083fd/pstack/skills/unslop)，原作者 Lauren Tan，遵循 MIT 许可。
+- `show-me`：中文化并适配自 [HumanLayer skills 的 show-me](https://github.com/humanlayer/skills/tree/bba9d13ab34f0a87f1cc33df4dd196372393ddfc/plugins/show-me/skills/show-me)，原作者 HumanLayer，遵循 MIT 许可。
 - `writing-for-agents`：中文化并适配自 [mattpocock/skills 的 writing-for-agents](https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-for-agents)，原作者 Matt Pocock，遵循 MIT 许可。
 - `clear-writing`：整合本仓库的 `writing-for-agents`、`ux-writing` 和 `unslop`。保留上述来源与作者归属；`writing-for-agents`、`unslop` 部分遵循 MIT 许可，`ux-writing` 部分遵循 Apache-2.0 许可。
 
