@@ -1,12 +1,12 @@
 ---
 name: clear-writing
-description: "编写、修改和审查面向人类或 Agent 的文档与文案，清理 AI 套话并保留原意。用于文章与回复、README、界面和 CLI 文本、诊断文案、注释、报告与演示，以及 Skill、AGENTS.md、CLAUDE.md；也用于文档分工、文档事实时效检查、行为变更后的文案同步和相关 diff 审查。"
+description: "编写、修改或审查文档、文案及 Agent 指令（Skill、AGENTS.md、CLAUDE.md），清理套话并核对事实与原意。文本本身是工作对象，或实现变化影响用户可见输出、已有说明或使用契约时触发；普通编码任务附带回复不单独触发。"
 license: MIT AND Apache-2.0
 ---
 
 # 清晰写作
 
-本页规则适用于所有文本写作与文案审查。按请求起草、局部修改、润色或审查，沿用读者、输入、格式、范围与已有授权。局部修改保留未受影响的措辞、结构和理由；只读审查交付问题、位置与依据。
+用于以文本为工作对象的写作与审查，以及实现变化后的受影响文案同步；普通编码任务附带的进度和结尾回复不单独触发。按请求起草、局部修改、润色或审查，沿用读者、输入、格式、范围与已有授权。局部修改保留未受影响的措辞、结构和理由；只读审查交付问题、位置与依据。
 
 ## 按需参考
 
@@ -15,7 +15,7 @@ license: MIT AND Apache-2.0
 - README、文档结构、标题、注释、报告、演示、导出、界面文案，以及事实归属或时效性：[人类文档与文案](references/human-writing.md)。
 - CLI 帮助、错误、状态、诊断、机器输出，以及行为变更后的文案同步与测试：[产品输出与同步](references/product-output.md)。
 - Agent 文档，包括 Skill、AGENTS.md、CLAUDE.md 和引用的执行说明或纯参考资料：[Agent 文档](references/agent-writing.md)。
-- 创建或编辑 Skill 时，同时读取 [Skill 机制](references/skill-mechanics.md)，核对触发、调用策略和路由。
+- 新建 Skill，或修改其触发描述、调用策略、拆分与路由时，读取 [Skill 机制](references/skill-mechanics.md)；仅修改正文措辞时跳过。
 
 普通写作不涉及上述分支时只应用本页，不因此启动文档重组、仓库扫描或全面审计。
 
